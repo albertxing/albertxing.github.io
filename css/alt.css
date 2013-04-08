@@ -9,6 +9,10 @@ body {
 	padding: 20px 33.333%;
 }
 
+#alt {
+	display: none;
+}
+
 h1 {
 	font-weight: bold;
 	font-size: 1.3em;
