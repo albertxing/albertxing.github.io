@@ -1,6 +1,7 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, regexp: true, indent: 4, maxerr: 50 */
 /*global define, window, document */
 
+// Global variabls
 var textCanvas = document.getElementById('body'),
 	suggestions = ['work', 'portfolio', 'projects', 'about', 'info', 'contact', 'email'],
 	suggested = '',
@@ -16,6 +17,10 @@ var textCanvas = document.getElementById('body'),
 	lineHeight = 18,
 	ready = false;
 
+// Temporary canvas variables
+var ctx, blinkCanvas, bctx, suggCanvas, sctx;
+
+// Keyword variables
 var initial, work, portfolio, projects, about, info, contact, email;
 
 initial = ['<div id="hold">', '\t<span id="text">', '\t\tThe end is where we start from.', '\t</span>', '</div>'];
@@ -398,12 +403,6 @@ eval(unescape('%66%75%6E%63%74%69%6F%6E%20%64%46%28%73%29%7B%0A%76%61%72%20%73%3
 
 
 /* Do you hear that? */
-
-var ctx,
-	blinkCanvas,
-	bctx,
-	suggCanvas,
-	sctx;
 
 // Give it a go
 window.onload = function () {
