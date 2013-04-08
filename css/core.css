@@ -1,0 +1,44 @@
+body {
+	font: 0.8em/1.4em 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+	cursor: default;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#body {
+	z-index: 1;
+}
+
+#blink {
+	z-index: 2;
+}
+
+#sugg {
+	z-index: 3;
+}
+
+#output {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	z-index: 0;
+}
+
+#hold {
+	display: block;
+	position: fixed;
+	padding: 0;
+	width: 15%;
+	left: 80%;
+	top: 50%;
+	color: #DDD;
+}

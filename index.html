@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Albert Xing</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+        <meta name="description" content="I am Albert Xing. I code. I design. I dream in color. Welcome to my world." />
+        <link rel="stylesheet" href="css/alt.css">
+        <link rel="stylesheet" type="text/css" href="css/core.css">
+    </head>
+    <body>
+        <canvas id="body">
+            <div class="alt" itemscope itemtype="http://schema.org/Person">
+                <h1>I am <span itemprop="name">Albert Xing</span>. <span itemprop="description">I code. I design. I dream in color.</span></h1>
+                <h2>I do web design &amp; development.</h2>
+                <p>That means that I build websites like these, although they often <a href="#better">look better</a>. Why? Because I that's what I love doing.</p>
+                <h3>I contribute to open source projects</h3>
+                <p>I believe that code should be accessible to everyone, so that we can all improve each other's projects and bring ideas together. I've collaborated with a few open source projects - you can see my contributions on <a href="http://github.com/albertxing" target="blank" itemprop="url">Github</a>.</p>
+                <h3>Not much to show</h3>
+                <p>I'm still quite busy being a student at the <span itemprop="affiliation">University of British Columbia</span>, so you're going to have to check back later for more samples of my work. Meanwhile, you'll have to go to my Github page or my <a href="http://www.linkedin.com/in/AlbertXing" target="blank" itemprop="url">LinkedIn profile</a> for more information. You can also visit my work-in-process <a href="work.html">portfolio page</a></p>
+                <h2 id="better">May I suggest...?</h2>
+                <h3>I think you need an update.</h3>
+                <p>The reason why you're seeing this rather simple site is because your browser doesn't support the most advanced technologies that power my site. I would recommend downloading the <a href="http://abetterbrowser.org/" target="blank">latest and greatest in web browsers</a>, or <a id="update" target="blank">updating your own</a>.</p>
+                <script>
+                    var browser = navigator.userAgent;
+                    var link;
+                    switch (true) {
+                        case (browser.indexOf('Chrome') !== -1):
+                            link = 'https://www.google.com/intl/en/chrome/browser/';
+                            break;
+                        case (browser.indexOf('Mac') !== -1):
+                            link = 'http://support.apple.com/downloads/#internet';
+                            break;
+                        case (browser.indexOf('Windows') !== -1):
+                            link = 'http://windows.microsoft.com/en-us/internet-explorer/download-ie';
+                            break;
+                        case (browser.indexOf('Mozilla') !== -1):
+                            link = 'http://www.mozilla.org/en-US/firefox/new/';
+                            break;
+                        case (browser.indexOf('Opera') !== -1):
+                            link = 'http://www.opera.com/download/';
+                            break;
+                    }
+                    document.getElementById('update').href = link;
+                </script>
+            </div>
+        </canvas>
+        <canvas id="blink"></canvas>
+        <canvas id="sugg"></canvas>
+        <div id="output"></div>
+        <script type="text/javascript" src="js/five.js"></script>
+        <script type="text/javascript">
+            
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-39024866-1']);
+            _gaq.push(['_trackPageview']);
+            
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+            
+        </script>
+    </body>
+</html>
