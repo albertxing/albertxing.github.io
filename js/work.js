@@ -4,40 +4,21 @@ var cHeight,
     cWidth,
     i = 0,
     cCanvas = document.getElementById("codeq"),
-    cCtx = cCanvas.getContext("2d"),
-    cImage = new Image(),
-    cImage2 = new Image();
+    cCtx = cCanvas.getContext("2d");
 
-cWidth = cCanvas.width = window.innerWidth * 0.3;
-cHeight = cCanvas.height = 300;
+var data = "<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'>" +
+             "<foreignObject width='100%' height='100%'>" +
+               "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:40px'>" +
+                 "<em>I</em> like <span style='color:white; text-shadow:0 0 2px blue;'>cheese</span>" +
+               "</div>" +
+             "</foreignObject>" +
+           "</svg>";
 
-cImage.onload = function () {
-    
-    "use strict";
-    
-    cCtx.drawImage(cImage, 0, -80);
-    var anim = setInterval(function () {
-        if (i <= cImage.width - cWidth) {
-            cCtx.clearRect(0, 0, cWidth, cHeight);
-            cCtx.drawImage(cImage, -i * 0.7, -80 - i / 2.8);
-            i += 5;
-        } else {
-            clearInterval(anim);
-            var del = cImage.width - cWidth;
-            i = 0;
-            anim = setInterval(function () {
-                if (i <= 800) {
-                    cCtx.clearRect(0, 0, cWidth, cHeight);
-                    cCtx.drawImage(cImage, -del * 0.7, -80 - del / 2.8 - i);
-                    cCtx.drawImage(cImage2, -del * 0.7, 520 - del / 2.8 - i);
-                    i += 5;
-                } else {
-                    clearInterval(anim);
-                }
-            }, 10);
-        }
-    }, 10);
+var DOMURL = self.URL || self.webkitURL || self;
+var img = new Image();
+var svg = new Blob([data], {type: "image/svg+xml;charset=utf-8"});
+var url = DOMURL.createObjectURL(svg);
+img.onload = function() {
+    cCtx.drawImage(img, 0, 0);
+    DOMURL.revokeObjectURL(url);
 };
-
-cImage.src = "images/work/c1.png";
-cImage2.src = "images/work/c2.png";
