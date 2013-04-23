@@ -3,8 +3,8 @@
 var cHeight,
     cWidth,
     i = 0,
-    cCanvas = document.getElementById('codeq'),
-    cCtx = cCanvas.getContext('2d'),
+    cCanvas = document.getElementById("codeq"),
+    cCtx = cCanvas.getContext("2d"),
     cImage = new Image(),
     cImage2 = new Image();
 
@@ -38,5 +38,6 @@ cImage.onload = function () {
         }
     }, 10);
 };
-cImage.src = 'images/work/c1.png';
-cImage2.src = 'images/work/c2.png';
+
+cImage.src = "images/work/c1.png";
+cImage2.src = "images/work/c2.png";
