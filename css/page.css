@@ -4,21 +4,38 @@
 }
 
 @font-face {
-    font-family: Museo;
+    font-family: "Museo";
     font-weight: 300;
     src: url('../fonts/Museo-300.otf');
 }
 
 @font-face {
-    font-family: Museo;
+    font-family: "Museo";
     font-weight: 500;
     src: url('../fonts/Museo-500.otf');
 }
 
 @font-face {
-    font-family: Museo;
+    font-family: "Museo";
     font-weight: 700;
     src: url('../fonts/Museo-700.otf');
+}
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 700;
+    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Raleway-Bold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Raleway-Bold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
+}
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 600;
+    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Raleway-SemiBold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Raleway-SemiBold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
+}
+
+@font-face {
+    font-family: "Quattrocento";
+    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Quattrocento-Regular-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Quattrocento-Regular-webfont.ttf) format("truetype"), local("Georgia"), local("Minion Pro"), local("Times New Roman");
 }
 
 body {
@@ -77,10 +94,18 @@ canvas {
 }
 
 canvas.left {
-    left: -2px;
+    left: 0;
+    border-left: none;
 }
 
 canvas.right {
     left: auto;
-    right: -2px;
+    right: 0;
+    border-right: none;
+}
+
+.copy {
+    position: absolute;
+    top: 100%;
+    padding: 2em 0;
 }

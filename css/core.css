@@ -1,8 +1,21 @@
+html {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+    -webkit-transition: opacity 0.6s ease-out;
+    -moz-transition: opacity 0.6s ease-out;
+    -o-transition: opacity 0.6s ease-out;
+    -ms-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+}
+
 body {
-    font: 0.8em/1.4em 'DejaVu Sans Mono', Monaco, Consolas, monospace;
     cursor: default;
     overflow: hidden;
     overflow-y: auto;
+    font: 0.8em/1.4em 'DejaVu Sans Mono', Monaco, Consolas, monospace;
 }
 
 canvas {

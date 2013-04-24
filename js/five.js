@@ -451,8 +451,10 @@ window.onload = function () {
             clearInterval(blinkAnim);
         };
 
+        $("html").addClass("show");
+
     } catch (err) {
         console.log(err);
-        document.getElementById("alt").style.display = "block";
+        $("#alt").css("display", "block");
     }
 };
