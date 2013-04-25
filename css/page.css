@@ -21,31 +21,18 @@
     src: url('../fonts/Museo-700.otf');
 }
 
-@font-face {
-    font-family: "Raleway";
-    font-weight: 700;
-    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Raleway-Bold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Raleway-Bold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
-}
-
-@font-face {
-    font-family: "Raleway";
-    font-weight: 600;
-    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Raleway-SemiBold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Raleway-SemiBold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
-}
-
-@font-face {
-    font-family: "Quattrocento";
-    src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer//fonts/Quattrocento-Regular-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer//fonts/Quattrocento-Regular-webfont.ttf) format("truetype"), local("Georgia"), local("Minion Pro"), local("Times New Roman");
-}
-
 body {
+    margin: 0;
+}
+
+#body {
     background: #FFF;
     color: #333;
     padding: 20px 33.333%;
     font-family: 'DejaVu Sans Mono', Monaco, Consolas, monospace;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Museo';
 }
 
@@ -83,25 +70,58 @@ a:link:hover {
     margin: -1px -3px;
 }
 
-canvas {
+.display {
     height: 300px;
     width: 30%;
     background: #fff;
     position: absolute;
     top: auto;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.3);
     box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
 
-canvas.left {
-    left: 0;
+.display.left {
+    left: -31%;
     border-left: none;
+    -webkit-transition: left 0.5s ease-out;
+    -moz-transition: left 0.5s ease-out;
+    -ms-transition: left 0.5s ease-out;
+    -o-transition: left 0.5s ease-out;
+    transition: left 0.5s ease-out;
 }
 
-canvas.right {
+.display.right {
     left: auto;
-    right: 0;
+    right: -31%;
     border-right: none;
+    -webkit-transition: right 0.5s ease-out;
+    -moz-transition: right 0.5s ease-out;
+    -ms-transition: right 0.5s ease-out;
+    -o-transition: right 0.5s ease-out;
+    transition: right 0.5s ease-out;
+}
+
+.display .body {
+    display: none;
+}
+
+.display .body.current {
+    display: block;
+}
+
+.left.show {
+    left: 0;
+}
+
+.right.show {
+    right: 0;
 }
 
 .copy {

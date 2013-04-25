@@ -1,0 +1,326 @@
+@font-face {
+  font-family: "Raleway";
+  font-weight: 700;
+  src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer/fonts/Raleway-Bold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer/fonts/Raleway-Bold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 600;
+  src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer/fonts/Raleway-SemiBold-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer/fonts/Raleway-SemiBold-webfont.ttf) format("truetype"), local("Arial"), local("Helvetica Neue");
+}
+@font-face {
+  font-family: "Quattrocento";
+  src: local("Nonexistent 1442"), url(//albertxing.github.io/Lucifer/fonts/Quattrocento-Regular-webfont.svg) format("svg"), url(//albertxing.github.io/Lucifer/fonts/Quattrocento-Regular-webfont.ttf) format("truetype"), local("Georgia"), local("Minion Pro"), local("Times New Roman");
+}
+#codeq #background {
+  position: fixed;
+  height: auto;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+#codeq h1,
+#codeq h2,
+#codeq h3,
+#codeq h4,
+#codeq h5,
+#codeq h6 {
+  font-family: "Raleway", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+#codeq h1 {
+  text-align: center;
+  margin: 0px auto;
+  width: 500px;
+  font-size: 3em;
+}
+#codeq p {
+  line-height: 22px;
+  text-align: justify;
+}
+#codeq a {
+  text-decoration: none;
+  color: #0077cc;
+  padding: 0;
+  margin: 0;
+}
+#codeq a:hover {
+  background: #0077cc;
+  color: white;
+}
+#codeq a:active {
+  background: #005599;
+}
+#codeq .body {
+  font-family: "Raleway", "Segoe UI", sans-serif;
+  font-size: 16px;
+  -webkit-font-rendering: optimizeLegibility;
+  -moz-font-rendering: optimizeLegibility;
+  -ms-font-rendering: optimizeLegibility;
+  -o-font-rendering: optimizeLegibility;
+  font-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "lnum", "dlig", "liga";
+  -moz-font-feature-settings: "lnum", "dlig", "liga";
+  -ms-font-feature-settings: "lnum", "dlig", "liga";
+  font-feature-settings: "lnum", "dlig", "liga";
+  margin: 0;
+  zoom: 0.7;
+}
+#codeq .loaded {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+#codeq header {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: white;
+  z-index: 5;
+  width: 100%;
+  -webkit-transition: margin-bottom 0.5s ease;
+  -moz-transition: margin-bottom 0.5s ease;
+  -o-transition: margin-bottom 0.5s ease;
+  -ms-transition: margin-bottom 0.5s ease;
+  transition: margin-bottom 0.5s ease;
+}
+#codeq nav {
+  position: relative;
+  color: #222222;
+  width: 500px;
+  margin: 0 auto;
+  text-transform: capitalize;
+  font-size: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#codeq header.hidden {
+  margin-bottom: -50px;
+}
+#codeq nav > a,
+#codeq nav > a:hover,
+#codeq nav > a:active {
+  float: left;
+  font: 700 12pt/50px "Raleway";
+  text-align: center;
+  text-decoration: none;
+  color: #222222;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  margin-right: 4em;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  -o-transition: color 0.2s;
+  -ms-transition: color 0.2s;
+  transition: color 0.2s;
+}
+#codeq nav > a:first-child,
+#codeq nav > .back + a {
+  text-align: left;
+}
+#codeq nav > a:last-child {
+  text-align: right;
+}
+#codeq nav a.home {
+  text-align: right;
+  float: right;
+  text-transform: uppercase;
+  margin-right: 0;
+}
+#codeq #content {
+  max-width: 100%;
+  padding: 0 0 50px 0;
+}
+#codeq .words {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  padding-top: 8px;
+  max-width: 500px;
+  font: 1em "Quattrocento", serif;
+}
+#codeq #landing #background {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+#codeq #landing #title {
+  font: 600 4em/1em 'Raleway';
+  color: #222222;
+  position: absolute;
+  width: 100%;
+  margin: -1em auto 0;
+  text-align: center;
+  text-shadow: 0 0 70px white;
+  top: 240px;
+}
+#codeq #landing #title span {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+}
+#codeq #landing #hold {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  margin-top: -50px;
+  background-color: white;
+  color: #222222;
+  z-index: 1;
+}
+#codeq #landing #work {
+  width: 500px;
+  overflow-x: hidden;
+  margin: 50px auto;
+  text-align: center;
+  z-index: 2;
+}
+#codeq #landing #work .row {
+  max-height: 50%;
+  overflow: hidden;
+}
+#codeq #landing #work .cell {
+  display: inline-block;
+  width: 33.33%;
+  max-width: 33.33%;
+  overflow: hidden;
+  float: left;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 1em solid white;
+  border-left: none;
+  border-bottom: none;
+  position: relative;
+}
+#codeq #landing #work .cell:nth-child(3n) {
+  float: right;
+  border-right: none;
+}
+#codeq #landing #work .cell.c2 {
+  min-width: 66.666%;
+}
+#codeq #landing #work .cell > img {
+  z-index: 3;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+}
+#codeq #landing #work .cell > img.tall {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+}
+#codeq #landing #work .cell > article {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  bottom: -100%;
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-transition: 0.2s bottom ease;
+  -moz-transition: 0.2s bottom ease;
+  -ms-transition: 0.2s bottom ease;
+  -o-transition: 0.2s bottom ease;
+  transition: 0.2s bottom ease;
+}
+#codeq #landing #work .cell:hover > article {
+  bottom: 0;
+  position: relative;
+  width: 690px;
+  height: 500px;
+  text-align: center;
+  margin: 100px auto 0 auto;
+  z-index: 2;
+  overflow: hidden;
+}
+#codeq #landing .project {
+  float: left;
+  width: 200px;
+  overflow: hidden;
+  margin: 15px;
+  border: 5px solid #222222;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#codeq #landing .project:nth-child(2) {
+  width: 430px;
+}
+#codeq #landing .project > img {
+  width: 100%;
+  float: left;
+}
+#codeq #about {
+  zoom: 1;
+}
+#codeq #about #hold {
+  top: 0;
+  left: 0;
+  width: 640px;
+  margin-top: 0;
+  position: relative;
+}
+#codeq #about #content {
+  padding-top: 30px;
+  clear: both;
+}
+#codeq #about #people {
+  padding: 0;
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+  clear: both;
+  overflow: hidden;
+  height: 300px;
+}
+#codeq #about .person {
+  width: 160px;
+  height: 160px;
+  float: left;
+  margin: 25px;
+  background: #f7f7f7;
+  border-radius: 100%;
+  overflow: hidden;
+  border: 5px solid #eeeeee;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: 0;
+}
+#codeq #about .person.ready {
+  -webkit-transition: all 0.15s;
+  -moz-transition: all 0.15s;
+  -ms-transition: all 0.15s;
+  -o-transition: all 0.15s;
+  transition: all 0.15s;
+}
+#codeq #about .person.ready.hover {
+  border-width: 1px;
+}
+#codeq #about .person > img {
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+#codeq #about #content {
+  padding-top: 2em;
+}

@@ -2,34 +2,78 @@
 <head>
 	<link rel="stylesheet" href="css/core.css">
 	<link rel="stylesheet" href="css/page.css">
+	<link rel="stylesheet" href="work/codeq/codeq.css">
 </head>
 <body>
-	<h1>I design with my heart and I code with my brain.</h1>
-	<h2>The result? Beautiful websites with uncompromised functionality</h2>
-	<p class="hyphenate">I work with the latest web technologies and the trendiest designs to provide a seamless connection between the site and the visitor.</p>
-	<h1>Projects</h1>
-	<canvas class="left" id="codeq"></canvas>
-	<h2>Codeq</h2>
-	<p class="hyphenate">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, ullam, perspiciatis, architecto, aliquid ipsa eum officia expedita ipsum sit consequuntur maiores sapiente cupiditate aut illum perferendis rerum nihil molestiae non?
-	</p>
-	<canvas class="right" id="site"></canvas>
-	<h2>This site</h2>
-	<p class="hyphenate">
-		What you're seeing is a product of hours of hard work. Building as much as possible from the ground up, I've created a unique portfolio experience based on the latest <a href="http://diveintohtml5.info/" target="blank">HTML5 technologies</a>. In fact, there's a badge at the bottom if you want to see exactly which parts of HTML5 I'm taking advantage of.
-	</p>
-	<h3>Raw code, pure power</h3>
-	<p class="hyphenate">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, recusandae, iure, sit, quibusdam repellat adipisci vero ipsum nihil sapiente officia ullam quo mollitia beatae. Eos consequuntur quos autem quae aut.
-	</p>
-	<div class="copy">
-		<div itemscope itemtype="http://schema.org/Corporation">
-			<span itemprop="description">Hosting</span> by <a href="http://wswd.net" itemprop="name">WSWD</a>
+	<div id="body">
+		<h1>I design with my heart and I code with my brain.</h1>
+		<h2>The result? Beautiful websites with uncompromised functionality</h2>
+		<p class="hyphenate">I work with the latest web technologies and the trendiest designs to provide a seamless connection between the site and the visitor.</p>
+		<h1>Projects</h1>
+		<div class="display left" id="codeq">
+			<div class="body" id="about">
+				<div id="hold">
+					<div id="people">
+						<div class="person"><img src="work/codeq/images/people/abxs.jpg" alt=""></div>
+						<div class="person"><img src="//placehold.it/160x160" alt=""></div>
+						<div class="person"><img src="" alt=""></div>
+						<div class="person"><img src="//placehold.it/160x160" alt=""></div>
+						<div class="person"><img src="//placehold.it/160x160" alt=""></div>
+						<div class="person"><img src="" alt=""></div>
+					</div>
+				</div>
+			</div>
+			<div class="body current" id="landing">
+				<img id="background" src="work/codeq/images/header.jpg" class="ns" alt="">
+				<div id="title">Hello World</div>
+				<header>
+					<nav>
+						<a href="about.html">About</a>
+						<a href="#">Work</a>
+						<a href="contact.html">Contact</a>
+						<a href="./" class="home">Codeq</a>
+					</nav>
+				</header>
+				<div id="hold">
+					<div id="work" class="ns">
+						<div class="cell r1"><img src="work/codeq/images/wats.jpg" class="tall"></div>
+						<div class="cell r1"><img src="work/codeq/images/text.jpg"></div>
+						<div class="cell r2"><img src="work/codeq/images/working.jpg" class="tall"></div>
+						<div class="cell r1 c2"><img src="work/codeq/images/inspect.jpg"></div>
+					</div>
+					<div id="content">
+						<span id="about" class="words hyphenate">
+							<h1>We are Codeq.</h1>
+							<h2>A design and development team commited to a better web.</h2>
+							<p>
+								Lorem ipsum dolor sit amet, eu nam paulo vitae oratio. Et nec veri equidem. Fastidii platonem ullamcorper his ut, te nibh paulo utroque mel. Cu facilisis splendide sea, ex augue movet eleifend sed. Duis veritus delicatissimi in nam.
+							</p>
+						</span>
+					</div>
+				</div>
+			</div>
 		</div>
-		&copy; MXIII Albert Xing.
-	</div>
+		<h2>Codeq</h2>
+		<p class="hyphenate">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, ullam, perspiciatis, architecto, aliquid ipsa eum officia expedita ipsum sit consequuntur maiores sapiente cupiditate aut illum perferendis rerum nihil molestiae non?
+		</p>
+		<div class="display right" id="site"></div>
+		<h2>This site</h2>
+		<p class="hyphenate">
+			What you're seeing is a product of hours of hard work. Building as much as possible from the ground up, I've created a unique portfolio experience based on the latest <a href="http://diveintohtml5.info/" target="blank">HTML5 technologies</a>. In fact, there's a badge at the bottom if you want to see exactly which parts of HTML5 I'm taking advantage of.
+		</p>
+		<h3>Raw code, pure power</h3>
+		<p class="hyphenate">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, recusandae, iure, sit, quibusdam repellat adipisci vero ipsum nihil sapiente officia ullam quo mollitia beatae. Eos consequuntur quos autem quae aut.
+		</p>
+		<div class="copy">
+			<div itemscope itemtype="http://schema.org/Corporation">
+				<span itemprop="description">Hosting</span> by <a href="http://wswd.net" itemprop="name">WSWD</a>
+			</div>
+			&copy; MXIII Albert Xing.
+		</div></div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-	<script src="js/Hyphenator.js"></script>
 	<script src="js/work.js"></script>
+	<script>runWork()</script>
 </body>
 </html>

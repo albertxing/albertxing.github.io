@@ -14,7 +14,8 @@ var textCanvas  = document.getElementById("body"),
     tab         = 0,
     line        = 0,
     lineHeight  = 18,
-    ready       = false;
+    ready       = false,
+    five        = true;
 
 // Temporary canvas variables
 var ctx, blinkCanvas, bctx, suggCanvas, sctx;
@@ -22,11 +23,25 @@ var ctx, blinkCanvas, bctx, suggCanvas, sctx;
 // Keyword variables
 var initial, work, portfolio, projects, about, info, contact, email;
 
+$.get('work.html', function(data) {
+    array = data.split("\n");
+    work = portfolio = projects = {
+        "code": array,
+        callback: function () {
+            runWork();
+        }
+    };
+});
+
 initial = ["<div id='hold'>", "\t<span id='text'>", "\t\tThe end is where we start from.", "\t</span>", "</div>"];
 
-work = portfolio = projects = ["<div id='work'>WORK</div>", "<style>", "\t#work {", "\t\tposition: fixed;", "\t\tbackground: white;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"];
+about = info = {
+    "code": ["<div id='about'>ABOUT</div>", "<style>", "\t#about {", "\t\tposition: fixed;", "\t\tbackground: skyblue;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]
+};
 
-about = info = contact = email = ["<div id='about'>ABOUT</div>", "<style>", "\t#about {", "\t\tposition: fixed;", "\t\tbackground: skyblue;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"];
+contact = email = {
+    "code": ["<div id='contact'>CONTACT</div>", "<style>", "\t#contact {", "\t\tposition: fixed; color: #FAFAFA;", "\t\tbackground: #222;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]
+};
 
 var printInt, blinkAnim, blinkInt, cWidth, cHeight, ouput, charWidth, allWidth, winCharLength, numLines;
 
@@ -79,7 +94,7 @@ function convertTab(array) {
     return newArray;
 }
 
-function go(input,loader,byLine) {
+function go(input,loader,byLine,callback) {
     ready = false;
     clearInterval(blinkInt);
     clearInterval(blinkAnim);
@@ -102,6 +117,9 @@ function go(input,loader,byLine) {
                 suggest();
                 blink();
                 blinkInt = setInterval(blink,1200);
+                if (callback && callback.constructor.name === "Function") {
+                    callback();
+                }
                 ready = true;
                 return false;
             }
@@ -242,7 +260,7 @@ function retKey(keyID,shift,ctrl) {
         if (suggested.indexOf(output[line].toLowerCase()) !== -1) {
             line = 0;
             document.getElementById("output").innerHTML = "";
-            go(window[suggested],false,true);
+            go(window[suggested].code, false, true, window[suggested].callback);
             return;
         } else if (all.search(/^[^<]*<([A-z][A-z0-9]*).*>.*<\/\1>[^<]*$/) !== -1) {
             output[line] += mapKey(shift, keyID);
