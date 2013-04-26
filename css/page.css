@@ -33,7 +33,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Museo';
+    font-family: 'Museo', Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -90,22 +90,22 @@ a:link:hover {
 .display.left {
     left: -31%;
     border-left: none;
-    -webkit-transition: left 0.5s ease-out;
-    -moz-transition: left 0.5s ease-out;
-    -ms-transition: left 0.5s ease-out;
-    -o-transition: left 0.5s ease-out;
-    transition: left 0.5s ease-out;
+    -webkit-transition: left 0.5s 0.1s ease-out;
+    -moz-transition: left 0.5s 0.1s ease-out;
+    -ms-transition: left 0.5s 0.1s ease-out;
+    -o-transition: left 0.5s 0.1s ease-out;
+    transition: left 0.5s 0.1s ease-out;
 }
 
 .display.right {
     left: auto;
     right: -31%;
     border-right: none;
-    -webkit-transition: right 0.5s ease-out;
-    -moz-transition: right 0.5s ease-out;
-    -ms-transition: right 0.5s ease-out;
-    -o-transition: right 0.5s ease-out;
-    transition: right 0.5s ease-out;
+    -webkit-transition: right 0.5s 0.1s ease-out;
+    -moz-transition: right 0.5s 0.1s ease-out;
+    -ms-transition: right 0.5s 0.1s ease-out;
+    -o-transition: right 0.5s 0.1s ease-out;
+    transition: right 0.5s 0.1s ease-out;
 }
 
 .display .body {

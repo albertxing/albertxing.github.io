@@ -60,7 +60,7 @@ var offsets = {
 
 var loc = window.location.href;
 
-if (loc.substr(loc.length - 9, loc.length) === "index.html" || loc.substr(loc.length - 1, loc.length) === "/") {
+if (loc.substr(loc.length - 9, loc.length) === "index.html" || loc.substr(loc.length - 1, loc.length) === "/"  || loc.substr(loc.length - 2, loc.length) === ".tk" || loc.substr(loc.length - 2, loc.length) === ".com") {
     load = "#output #body";
     win = "#output";
     scrollListener();
@@ -70,7 +70,6 @@ if (loc.substr(loc.length - 9, loc.length) === "index.html" || loc.substr(loc.le
 
 $(window).on("load", function () {
     $("html").addClass("show");
-    console.log("Onload fired");
     $(win).scroll();
 });
 

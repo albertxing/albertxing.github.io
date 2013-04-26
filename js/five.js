@@ -2,20 +2,20 @@
 
 // Global variabls
 var textCanvas  = document.getElementById("body"),
-    suggestions = ["work", "portfolio", "projects", "about", "info", "contact", "email"],
-    suggested   = "",
-    currSuggest = "",
-    current     = "",
-    i           = 0,
-    mLeft       = 10,
-    mTop        = 20,
-    rx          = 0,
-    ry          = mTop - 13,
-    tab         = 0,
-    line        = 0,
-    lineHeight  = 18,
-    ready       = false,
-    five        = true;
+suggestions = ["work", "portfolio", "projects", "about", "info", "contact", "email"],
+suggested   = "",
+currSuggest = "",
+current     = "",
+i           = 0,
+mLeft       = 10,
+mTop        = 20,
+rx          = 0,
+ry          = mTop - 13,
+tab         = 0,
+line        = 0,
+lineHeight  = 18,
+ready       = false,
+five        = true;
 
 // Temporary canvas variables
 var ctx, blinkCanvas, bctx, suggCanvas, sctx;
@@ -23,25 +23,27 @@ var ctx, blinkCanvas, bctx, suggCanvas, sctx;
 // Keyword variables
 var initial, work, portfolio, projects, about, info, contact, email;
 
+// AJAX requests
 $.get('work.html', function(data) {
     array = data.split("\n");
-    work = portfolio = projects = {
-        "code": array,
-        callback: function () {
-            runWork();
-        }
-    };
+    work = portfolio = projects = new Code(array, runWork);
 });
+
+/**
+ * The code to output and the callback associated with it
+ * @param {Array}   input    The code to output, one line per array item
+ * @param {Function} callback The callback function to call after code is written
+ */
+var Code = function(input, callback) {
+    this.code = input;
+    this.callback = callback;
+};
 
 initial = ["<div id='hold'>", "\t<span id='text'>", "\t\tThe end is where we start from.", "\t</span>", "</div>"];
 
-about = info = {
-    "code": ["<div id='about'>ABOUT</div>", "<style>", "\t#about {", "\t\tposition: fixed;", "\t\tbackground: skyblue;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]
-};
+about = info = new Code(["<div id='about'>ABOUT</div>", "<style>", "\t#about {", "\t\tposition: fixed;", "\t\tbackground: skyblue;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]);
 
-contact = email = {
-    "code": ["<div id='contact'>CONTACT</div>", "<style>", "\t#contact {", "\t\tposition: fixed; color: #FAFAFA;", "\t\tbackground: #222;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]
-};
+contact = email = new Code(["<div id='contact'>CONTACT</div>", "<style>", "\t#contact {", "\t\tposition: fixed; color: #FAFAFA;", "\t\tbackground: #222;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]);
 
 var printInt, blinkAnim, blinkInt, cWidth, cHeight, ouput, charWidth, allWidth, winCharLength, numLines;
 
@@ -94,6 +96,14 @@ function convertTab(array) {
     return newArray;
 }
 
+/**
+ * Writes code into the console and handles callback
+ * @param  {Array} input  The code to write, one line per array item
+ * @param  {Boolean} loader Whether the function is called for init
+ * @param  {Boolean} byLine Whether to write the code line by line
+ * @param  {Function} callback The callback associated with the output
+ * @return {Boolean}        Just there
+ */
 function go(input,loader,byLine,callback) {
     ready = false;
     clearInterval(blinkInt);
@@ -112,14 +122,36 @@ function go(input,loader,byLine,callback) {
             } else {
                 clearInterval(printInt);
                 writeCode(output);
+                (function (html) {
+                    var imageloads = [];
+                    $(html).find("img").each(function () {
+                        var dfd = $.Deferred();
+                        $(this).on('load', function () {
+                            dfd.resolve();
+                        });
+                        if (this.complete) {
+                            $(this).trigger('load');
+                        }
+                        imageloads.push(dfd);
+                    });
+                    $.when(undefined, imageloads).done(function () {
+                        Hyphenator.run();
+                        var styleCheck = window.setInterval(function () {
+                            if ($("#output h1").css("font-family") === "Museo, Arial, Helvetica, sans-serif") {
+                                $(html).removeClass("hidden").addClass("show");
+                                if (callback && callback.constructor.name === "Function") {
+                                    callback();
+                                }
+                                window.clearInterval(styleCheck);
+                            }
+                        }, 200);
+                    });
+                })("#output");
                 output[line] = "";
                 render(output);
                 suggest();
                 blink();
                 blinkInt = setInterval(blink,1200);
-                if (callback && callback.constructor.name === "Function") {
-                    callback();
-                }
                 ready = true;
                 return false;
             }
@@ -249,79 +281,79 @@ function retKey(keyID,shift,ctrl) {
     {
     // Functions
     case (keyID >= 112 && keyID <= 123):
-        break;
+    break;
 
     // Unlucky! (Return)
     case (keyID == 13):
-        var all = "";
-        for (var l in output) {
-            all += output[l];
-        }
-        if (suggested.indexOf(output[line].toLowerCase()) !== -1) {
-            line = 0;
-            document.getElementById("output").innerHTML = "";
-            go(window[suggested].code, false, true, window[suggested].callback);
-            return;
-        } else if (all.search(/^[^<]*<([A-z][A-z0-9]*).*>.*<\/\1>[^<]*$/) !== -1) {
-            output[line] += mapKey(shift, keyID);
-            line = 0;
-            output = [all];
-            writeCode(output,output[line].length);
-        } else {
-            output[line + 1] = "";
-            rx = 0;
-            line++;
-        }
-        render(output);
-        suggest();
-        break;
+    var all = "";
+    for (var l in output) {
+        all += output[l];
+    }
+    if (suggested.indexOf(output[line].toLowerCase()) !== -1) {
+        line = 0;
+        $("#output").html("").addClass("hidden");
+        go(window[suggested].code, false, true, window[suggested].callback);
+        return;
+    } else if (all.search(/^[^<]*<([A-z][A-z0-9]*).*>.*<\/\1>[^<]*$/) !== -1) {
+        output[line] += mapKey(shift, keyID);
+        line = 0;
+        output = [all];
+        writeCode(output,output[line].length);
+    } else {
+        output[line + 1] = "";
+        rx = 0;
+        line++;
+    }
+    render(output);
+    suggest();
+    break;
 
     // I've heard of a holiday called Easter
     case (keyID == 55 && shift):
-        document.querySelector("body").style.background = "white";
-        document.querySelector("#hold").style.color = "#333";
-        bstyle.color = "#333";
-        ctx.fillStyle = "#333";
-        bctx.fillStyle = "#DDD";
-        render(output);
-        break;
+    document.querySelector("body").style.background = "white";
+    document.querySelector("#hold").style.color = "#333";
+    bstyle.color = "#333";
+    ctx.fillStyle = "#333";
+    bctx.fillStyle = "#DDD";
+    render(output);
+    break;
 
     // Click - clack
     case (keyID == 82 && ctrl && shift):
-        window.location.reload(true);
-        break;
+    window.location.reload(true);
+    break;
 
     // Click - clack
     case ((keyID == 82 && ctrl) || keyID == 116):
-        window.location.reload();
-        break;
+    window.location.reload();
+    break;
 
     // Boom
     case (keyID == 46 || keyID == 8):
-        if (output[line] === "" && line !== 0) {
-            output.splice(line);
-            line--;
-        } else {
-            output[line] = output[line].substring(0,output[line].length-1);
-        }
-        render(output);
-        suggest();
-        return false;
+    if (output[line] === "" && line !== 0) {
+        output.splice(line);
+        line--;
+    } else {
+        output[line] = output[line].substring(0,output[line].length-1);
+    }
+    render(output);
+    suggest();
+    return false;
 
     // Autocomplete
     case (keyID == 39 || keyID == 9):
-        output[line] += currSuggest;
-        suggest();
-        render(output);
-        return false;
+    output[line] += currSuggest;
+    suggest();
+    render(output);
+    return false;
 
     default:
-        output[line] += mapKey(shift, keyID);
-        fold(output[line],output[line].length);
-        render(output);
-        suggest();
-        break;
-    }
+    output[line] += mapKey(shift, keyID);
+    fold(output[line],output[line].length);
+    render(output);
+    suggest();
+    break;
+}
 }
 
 function mapKey(isShiftKey, cCode) {
@@ -339,62 +371,62 @@ function mapKey(isShiftKey, cCode) {
         55: "&",
         56: "*",
         57: "(",
-        48: ")",
-        189: "_",
-        187: "+",
-        219: "{",
-        221: "}",
-        220: "|",
-        186: ":",
-        222: "\"",
-        188: "<",
-        190: ">",
-        191: "?",
-        32: " "
-    };
+            48: ")",
+189: "_",
+187: "+",
+219: "{",
+221: "}",
+220: "|",
+186: ":",
+222: "\"",
+188: "<",
+190: ">",
+191: "?",
+32: " "
+};
 
-    var unshift = {
-        192: "`",
-        189: "-",
-        187: "=",
-        219: "[",
-        221: "]",
-        220: "\\",
-        186: ";",
-        222: "'",
-        188: ",",
-        190: ".",
-        191: "/",
-        32: " "
-    };
+var unshift = {
+    192: "`",
+    189: "-",
+    187: "=",
+    219: "[",
+    221: "]",
+    220: "\\",
+    186: ";",
+    222: "'",
+    188: ",",
+    190: ".",
+    191: "/",
+    32: " "
+};
 
-    if (cCode >= 0 && cCode <= 46 && cCode !== 32 || cCode === 91 || cCode === 92) {
-        character = '';
-    } else if (isShiftKey) {
+if (cCode >= 0 && cCode <= 46 && cCode !== 32 || cCode === 91 || cCode === 92) {
+    character = '';
+} else if (isShiftKey) {
 
-        if ( cCode >= 65 && cCode <= 90 ) {
-            character = String.fromCharCode(cCode);
-        } else if (characterMap[cCode] !== "undefined") {
-            character = characterMap[cCode];
-        } else {
-            character = '';
-        }
-
+    if ( cCode >= 65 && cCode <= 90 ) {
+        character = String.fromCharCode(cCode);
+    } else if (characterMap[cCode] !== "undefined") {
+        character = characterMap[cCode];
     } else {
-
-        if ( cCode >= 65 && cCode <= 90 ) {
-            character = String.fromCharCode(cCode).toLowerCase();
-        } else if ( cCode >= 48 && cCode <= 57) {
-            character = String.fromCharCode(cCode);
-        } else if (unshift[cCode] !== "undefined") {
-            character = unshift[cCode];
-        }
-        else {
-            character = '';
-        }
+        character = '';
     }
 
-    return character;
+} else {
+
+    if ( cCode >= 65 && cCode <= 90 ) {
+        character = String.fromCharCode(cCode).toLowerCase();
+    } else if ( cCode >= 48 && cCode <= 57) {
+        character = String.fromCharCode(cCode);
+    } else if (unshift[cCode] !== "undefined") {
+        character = unshift[cCode];
+    }
+    else {
+        character = '';
+    }
+}
+
+return character;
 }
 
 function suggest() {
