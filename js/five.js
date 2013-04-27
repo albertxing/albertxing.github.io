@@ -39,7 +39,7 @@ var Code = function(input, callback) {
     this.callback = callback;
 };
 
-initial = ["<div id='hold'>", "\t<span id='text'>", "\t\tThe end is where we start from.", "\t</span>", "</div>"];
+initial = [""];
 
 about = info = new Code(["<div id='about'>ABOUT</div>", "<style>", "\t#about {", "\t\tposition: fixed;", "\t\tbackground: skyblue;", "\t\twidth: 100px;", "\t\theight: 50px;", "\t\tfont: 1.5em/50px 'DejaVu Sans Mono', Monaco, Consolas, monspace;", "\t\ttop: 50%;", "\t\tleft: 50%;", "\t\tmargin: -25px 0 0 -50px;", "}", "</style>"]);
 
@@ -172,7 +172,7 @@ function go(input,loader,byLine,callback) {
                 else
                     writeCode(output);
                 if (input == initial) {
-                    go(["I am Albert Xing. I code. I design. I dream in color. Welcome to my world."],true,false);
+                    go(["I'm a developer and a designer."],true,false);
                     return false;
                 }
                 render(output);
@@ -195,7 +195,7 @@ function go(input,loader,byLine,callback) {
                 render(compile);
             }
             i++;
-        }, 15);
+        }, 20);
     }
 }
 
