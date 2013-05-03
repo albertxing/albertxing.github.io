@@ -253,7 +253,7 @@ function detKey(e) {
         bctx.globalAlpha = 1;
         
         // To be or not to be
-        if (output[line].substr(output[line].length - 7,output[line].length) == dF("Rfwnxxf5")) {
+        if (output[line].substr(line === 0 && output[line].length - 7,output[line].length) == dF("Rfwnxxf5")) {
             document.querySelector("body").style.background = dF("dsjntpo1");
             ctx.fillStyle = "#FFF";
             bctx.fillStyle = "#DDD";
@@ -282,7 +282,7 @@ function retKey(keyID,shift,ctrl) {
             for (var l in output) {
                 all += output[l];
             }
-            if (suggested.indexOf(output[line].toLowerCase()) !== -1) {
+            if (suggested.indexOf(output[line].toLowerCase()) !== -1 && output[line] !== "") {
                 line = 0;
                 $("#output").html("").addClass("hidden");
                 go(window[suggested].code, false, true, window[suggested].callback);
