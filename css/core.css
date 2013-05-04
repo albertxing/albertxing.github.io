@@ -1,7 +1,7 @@
 @font-face {
     font-family: "DejaVu Sans Mono";
     font-weight: 400;
-    src: local("Nonexistent 1442"), url(../fonts/DejaVu.ttf) format("truetype");
+    src: url(../fonts/DejaVu.ttf) format("truetype");
 }
 
 html {
