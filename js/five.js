@@ -130,13 +130,15 @@ function go(input,loader,byLine,callback) {
                     $.when(undefined, imageloads).done(function () {
                         Hyphenator.run();
                         var styleCheck = window.setInterval(function () {
-                            if ($("#output h1").css("font-family") === "Museo, Arial, Helvetica, sans-serif") {
+                            if ($("#output h1").css("font-family").indexOf("Museo") !== -1) {
                                 $(html).removeClass("hidden").addClass("show");
                                 if (callback && callback.constructor.name === "Function") {
                                     callback();
+                                    console.log("Callback fired");
                                 }
                                 window.clearInterval(styleCheck);
                             }
+                            console.log("In stylecheck");
                         }, 200);
                     });
                 })("#output");

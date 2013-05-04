@@ -1,50 +1,50 @@
 function runWork() {
 
-var offsets = {
-    "codeq": {
-        "scroll": 0,
-        "delay": 1000,
-        callback: function () {
-            masonry();
-            $("#codeq").animate({
-                scrollTop: 800
-            }, {
-                duration: 5000,
-                done: function () {
-                    $("#codeq .body").removeClass("current");
-                    $("#codeq #about").addClass("current");
+    var offsets = {
+        "codeq": {
+            "scroll": 0,
+            "delay": 1000,
+            callback: function () {
+                masonry();
+                $("#codeq").animate({
+                    scrollTop: 800
+                }, {
+                    duration: 5000,
+                    done: function () {
+                        $("#codeq .body").removeClass("current");
+                        $("#codeq #about").addClass("current");
 
-                    var people = $(".person");
+                        var people = $(".person");
 
-                    (function shuffle(array) {
-                        var p, n, tmp;
-                        for (p = array.length; p;) {
-                            n = Math.random() * p-- | 0;
-                            tmp = array[n];
-                            array[n] = array[p];
-                            array[p] = tmp;
-                        }
-                    })(people);
+                        (function shuffle(array) {
+                            var p, n, tmp;
+                            for (p = array.length; p;) {
+                                n = Math.random() * p-- | 0;
+                                tmp = array[n];
+                                array[n] = array[p];
+                                array[p] = tmp;
+                            }
+                        })(people);
 
-                    people.each(function (i, el) {
+                        people.each(function (i, el) {
+                            setTimeout(function () {
+                                $(el).addClass("loaded").css("opacity", "1").promise().done(function () {
+                                    setTimeout(function () {
+                                        $(el).removeClass("loaded").addClass("ready");
+                                    }, 1000);
+                                });
+                            }, i * 200);
+                        });
+
                         setTimeout(function () {
-                            $(el).addClass("loaded").css("opacity", "1").promise().done(function () {
+                            $("#about .person:first-child").addClass("hover").promise().done(function () {
                                 setTimeout(function () {
-                                    $(el).removeClass("loaded").addClass("ready");
+                                    $("#about .person:first-child").removeClass("hover");
                                 }, 1000);
                             });
-                        }, i * 200);
-                    });
-
-                    setTimeout(function () {
-                        $("#about .person:first-child").addClass("hover").promise().done(function () {
-                            setTimeout(function () {
-                                $("#about .person:first-child").removeClass("hover");
-                            }, 1000);
-                        });
-                    }, 1500);
-                }
-            });
+                        }, 1500);
+                    }
+                });
 },
 "done": false
 },
@@ -63,6 +63,7 @@ var loc = window.location.href;
 if (loc.substr(loc.length - 9, loc.length) === "index.html" || loc.substr(loc.length - 1, loc.length) === "/"  || loc.substr(loc.length - 2, loc.length) === ".tk" || loc.substr(loc.length - 2, loc.length) === ".com") {
     load = "#output #body";
     win = "#output";
+    $("html").addClass("show");
     scrollListener();
 } else {
     win = window;
