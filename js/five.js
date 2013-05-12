@@ -167,7 +167,7 @@ function go(input,loader,byLine,callback) {
                 else
                     writeCode(output);
                 if (input == initial) {
-                    go(["I'm a developer and a designer."],true,false);
+                    go(["I'm a web developer & designer."],true,false);
                     return false;
                 }
                 render(output);
