@@ -43,6 +43,15 @@ function runWork() {
                                 }, 1000);
                             });
                         }, 1500);
+
+                        setTimeout(function () {
+                            $("#codeq .body:not(#logo)").animate({
+                                "opacity": 0
+                            }, 200, function () {
+                                $(this).removeClass("current");
+                                $("#codeq #logo").addClass("current");
+                            });
+                        }, 4000);
                     }
                 });
 },

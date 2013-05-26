@@ -341,3 +341,23 @@
 #codeq #about #content {
   padding-top: 2em;
 }
+#codeq #logo {
+  height: 300px;
+  opacity: 0;
+}
+#codeq #logo img {
+  position: relative;
+  left: 50%;
+  margin-left: -60px;
+  top: 50%;
+  margin-top: -17.5px;
+  opacity: 0.8;
+}
+#codeq #logo.current {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}

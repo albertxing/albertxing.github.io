@@ -30,7 +30,6 @@ var initial, work, portfolio, projects, about, info, contact, email;
  * @param {Function} callback The callback function to call after code is written
  */
 var Code = function (input, callback) {
-    
     this.code = input;
     this.callback = callback;
 };
@@ -132,7 +131,7 @@ function go(input,loader,byLine,callback) {
                         var styleCheck = window.setInterval(function () {
                             if ($("#output h1").css("font-family").indexOf("Museo") !== -1) {
                                 $(html).removeClass("hidden").addClass("show");
-                                if (callback && callback.constructor.name === "Function") {
+                                if (callback && callback.constructor.toString().match("Function()")) {
                                     callback();
                                     console.log("Callback fired");
                                 }
@@ -495,8 +494,6 @@ window.onload = function () {
             clearInterval(blinkInt);
             clearInterval(blinkAnim);
         };
-        
-        $("html").addClass("show");
         
     } catch (err) {
         console.log(err);
