@@ -8,15 +8,16 @@ var textCanvas  = document.getElementById("body"),
     currSuggest = "",
     current     = "",
     i           = 0,
-    mLeft       = 10,
-    mTop        = 20,
+    mLeft       = 64,
+    mTop        = 64,
     rx          = 0,
     ry          = mTop - 13,
     tab         = 0,
     line        = 0,
     lineHeight  = 18,
     ready       = false,
-    five        = true;
+    five        = true,
+    ctxFill     = "#000";
 
 // Temporary canvas variables
 var ctx, blinkCanvas, bctx, suggCanvas, sctx;
@@ -46,10 +47,11 @@ function parameters() {
     
     cWidth = textCanvas.width = blinkCanvas.width = suggCanvas.width = window.innerWidth;
     cHeight = textCanvas.height = blinkCanvas.height = suggCanvas.height = window.innerHeight;
-    ctx.font = sctx.font = "1em 'DejaVu Sans Mono', Monaco, Consolas, Ubuntu Mono, monospace";
-    sctx.fillStyle = "#478EAB";
-    ctx.fillStyle = "#AAA";
-    bctx.fillStyle = "#CCC";
+    ctx.font = sctx.font = "10pt 'DejaVu Sans Mono', Monaco, Consolas, Ubuntu Mono, monospace";
+    
+    sctx.fillStyle = "#39D";
+    ctx.fillStyle = ctxFill;
+    bctx.fillStyle = "#666";
     
     var all = "";
     
@@ -220,7 +222,7 @@ function render(type) {
         ctx.fillText(type[a], mLeft, mTop + lineHeight * a);
     }
     rx = ctx.measureText(type[line]).width + mLeft;
-    bctx.fillRect(rx, ry + lineHeight * line, 9, 17);
+    bctx.fillRect(rx, ry + lineHeight * line + 15, 8, 1);
 }
 
 function blink() {
@@ -232,7 +234,7 @@ function blink() {
         } else {
             bctx.clearRect(0, 0, cWidth, cHeight);
             bctx.globalAlpha = Math.abs(Math.cos(a));
-            bctx.fillRect(rx, ry + line * lineHeight, 9, 17);
+            bctx.fillRect(rx, ry + line * lineHeight + 15, 8, 1);
         }
         a += 0.2;
     }, 50);
@@ -304,11 +306,9 @@ function retKey(keyID,shift,ctrl) {
             
             // I've heard of a holiday called Easter
         case (keyID == 55 && shift):
-            document.querySelector("body").style.background = "white";
-            document.querySelector("#hold").style.color = "#333";
-            bstyle.color = "#333";
-            ctx.fillStyle = "#333";
-            bctx.fillStyle = "#DDD";
+            document.querySelector("body").style.background = "#123";
+            ctxFill = "#CCC";
+            bctx.fillStyle = "red";
             render(output);
             break;
             
@@ -447,7 +447,7 @@ eval(unescape("%66%75%6E%63%74%69%6F%6E%20%64%46%28%73%29%7B%0A%76%61%72%20%73%3
 /* Do you hear that? */
 
 // Give it a go
-window.onload = function () {
+$(document).ready(function () {
     try {
         
         ctx = textCanvas.getContext("2d");
@@ -459,7 +459,7 @@ window.onload = function () {
         go(initial);
         var css = document.createElement("style");
         css.type = "text/css";
-        css.innerHTML = "body { background: #222530; color: #888; padding-left: 0.5ex; }";
+        css.innerHTML = "body { background: #fff; color: #888; padding-left: 0.5ex; }";
         document.getElementsByTagName("head")[0].appendChild(css);
         
         window.onresize = function() {
@@ -499,7 +499,7 @@ window.onload = function () {
         console.log(err);
         $("#alt").css("display", "block");
     }
-};
+});
 
 // AJAX requests
 $.get('work.html', function (data) {
