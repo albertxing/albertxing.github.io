@@ -1,17 +1,3 @@
-@font-face {
-  font-family: "Raleway";
-  font-weight: 700;
-  src: local("Nonexistent 1442"), url(../../fonts/Raleway-Bold.svg) format("svg"), url(../../fonts/Raleway-Bold.otf) format("opentype"), local("Arial"), local("Helvetica Neue");
-}
-@font-face {
-  font-family: "Raleway";
-  font-weight: 600;
-  src: local("Nonexistent 1442"), url(../../fonts/Raleway-SemiBold.svg) format("svg"), url(../../fonts/Raleway-SemiBold.otf) format("opentype"), local("Arial"), local("Helvetica Neue");
-}
-@font-face {
-  font-family: "Quattrocento";
-  src: local("Nonexistent 1442"), url(../../fonts/Quattrocento-Regular.svg) format("svg"), url(../../fonts/Quattrocento-Regular.otf) format("opentype"), local("Georgia"), local("Minion Pro"), local("Times New Roman");
-}
 #codeq #background {
   position: fixed;
   height: auto;

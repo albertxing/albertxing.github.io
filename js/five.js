@@ -82,6 +82,11 @@ function reorder() {
     }
 }
 
+/**
+ * Converts tab character to four spaces for display
+ * @param  {Array} array Array of code, one line per item
+ * @return {Array}       The modified array
+ */
 function convertTab(array) {
     var newArray = [];
     for (var item in array) {
@@ -96,7 +101,7 @@ function convertTab(array) {
  * @param  {Boolean} loader Whether the function is called for init
  * @param  {Boolean} byLine Whether to write the code line by line
  * @param  {Function} callback The callback associated with the output
- * @return {Boolean}        Just there
+ * @return {Boolean}        Just in case somebody needs it
  */
 function go(input,loader,byLine,callback) {
     ready = false;
@@ -195,6 +200,11 @@ function go(input,loader,byLine,callback) {
     }
 }
 
+/**
+ * Converts visible code to actual code in output element
+ * @param  {Array} input The code as an array
+ * @return {null}
+ */
 function writeCode(input) {
     var all = "";
     for (var l in input) {
@@ -206,14 +216,25 @@ function writeCode(input) {
     output = [""];
 }
 
+/**
+ * Breaks long text lines into multiple lines
+ * @param  {String} type Current line
+ * @param  {Number} i    Current character position
+ * @return {null}
+ */
 function fold(type,i) {
     if (ctx.measureText(type).width > cWidth - 2 * mLeft) {
-        var breakText = output[line].substr(i,output[line].length);
+        var breakText = output[line].substr(i, output[line].length);
         line++;
         output[line] = breakText;
     }
 }
 
+/**
+ * Renders code onto canvas
+ * @param  {Array} type Content to write, one line per item
+ * @return {null}
+ */
 function render(type) {
     parameters();
     ctx.clearRect(0, 0, cWidth, cHeight);
@@ -225,6 +246,10 @@ function render(type) {
     bctx.fillRect(rx, ry + lineHeight * line + 15, 8, 1);
 }
 
+/**
+ * Blinks the cursor
+ * @return {null}
+ */
 function blink() {
     var a = 0;
     blinkAnim = setInterval(function() {
@@ -240,7 +265,11 @@ function blink() {
     }, 50);
 }
 
-// No shit, Sherlock
+/**
+ * Handles keystrokes
+ * @param  {Event} e Key event
+ * @return {Boolean}   false if do nothing
+ */
 function detKey(e) {
     // Ready! Not.
     if (!ready) {
@@ -271,15 +300,19 @@ function detKey(e) {
     }
 }
 
-function retKey(keyID,shift,ctrl) {
-    // Light switch
+/**
+ * Secondary keystroke management, by case
+ * @param  {Number}  keyID   charCode of key pressed
+ * @param  {Boolean} isShift Whether shift key was pressed
+ * @param  {Boolean} isCtrl  Whether ctrl key was pressed
+ * @return {Boolean}         false
+ */
+function retKey(keyID, isShift, isCtrl) {
     switch (true)
     {
-            // Functions
-        case (keyID >= 112 && keyID <= 123):
+        case (keyID >= 112 && keyID <= 123 || isCtrl):
             break;
             
-            // Unlucky! (Return)
         case (keyID == 13):
             var all = "";
             for (var l in output) {
@@ -291,7 +324,7 @@ function retKey(keyID,shift,ctrl) {
                 go(window[suggested].code, false, true, window[suggested].callback);
                 return;
             } else if (all.search(/^[^<]*<([A-z][A-z0-9]*).*>.*<\/\1>[^<]*$/) !== -1) {
-                output[line] += mapKey(shift, keyID);
+                output[line] += mapKey(isShift, keyID);
                 line = 0;
                 output = [all];
                 writeCode(output,output[line].length);
@@ -303,26 +336,14 @@ function retKey(keyID,shift,ctrl) {
             render(output);
             suggest();
             break;
-            
-            // I've heard of a holiday called Easter
-        case (keyID == 55 && shift):
+
+        case (keyID == 55 && isShift):
             document.querySelector("body").style.background = "#123";
             ctxFill = "#CCC";
             bctx.fillStyle = "red";
             render(output);
             break;
-            
-            // Click - clack
-        case (keyID == 82 && ctrl && shift):
-            window.location.reload(true);
-            break;
-            
-            // Click - clack
-        case ((keyID == 82 && ctrl) || keyID == 116):
-            window.location.reload();
-            break;
-            
-            // Boom
+
         case (keyID == 46 || keyID == 8):
             if (output[line] === "" && line !== 0) {
                 output.splice(line);
@@ -334,7 +355,7 @@ function retKey(keyID,shift,ctrl) {
             suggest();
             return false;
             
-            // Autocomplete
+        // Autocomplete
         case (keyID == 39 || keyID == 9):
             output[line] += currSuggest;
             suggest();
@@ -342,7 +363,7 @@ function retKey(keyID,shift,ctrl) {
             return false;
             
         default:
-            output[line] += mapKey(shift, keyID);
+            output[line] += mapKey(isShift, keyID);
             fold(output[line],output[line].length);
             render(output);
             suggest();
@@ -350,6 +371,12 @@ function retKey(keyID,shift,ctrl) {
     }
 }
 
+/**
+ * Tertiary level for direct entry
+ * @param  {Boolean} isShiftKey Whether shift key was pressed
+ * @param  {Number}  cCode      charCode of key pressed
+ * @return {String}             Character to write
+ */
 function mapKey(isShiftKey, cCode) {
     
     var character = "";
@@ -518,5 +545,5 @@ $.get('work.html', function (data) {
 
 window.mobilecheck = function() {
     var check = false;
-    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|android|playbook|tablet|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
     return check; }
