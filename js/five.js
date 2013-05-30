@@ -540,7 +540,12 @@ $.get('work.html', function (data) {
     "use strict";
     
     var array = data.split("\n");
-    work = portfolio = projects = new Code(array, runWork);
+    var workInt = setInterval(function () {
+        if (runWork) {
+            work = portfolio = projects = new Code(array, runWork);
+            clearInterval(workInt);
+        }
+    }, 100);
 });
 
 window.mobilecheck = function() {
