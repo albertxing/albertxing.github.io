@@ -92,7 +92,7 @@ body {
 	to { color: #5af; }
 }
 
-#net > canvas {
+#net {
 	position: absolute;
 	top: 0;
 	left: 0;
