@@ -1,19 +1,18 @@
 $.post('post/ip.php', function(data) {
 	$.get('ip', function (data) {
 		var _lines = data.split("\n");
-		if (_lines[_lines.length - 1] === "") {
-			_lines.splice(_lines.length - 1, 1);
-		}
 		(function _drawDots (i) {
 			if (i < _lines.length) {
+				$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100));
 
 				var mat = _lines[i].split('.');
-				$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100))
-				addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
-					setTimeout(function () {
-						_drawDots(i + 1);
-					}, 10);
-				});
+				if (mat.length > 1) {
+					addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
+						setTimeout(function () {
+							_drawDots(i + 1);
+						}, 10);
+					});
+				}
 
 			} else {
 				_loaded();
