@@ -12,6 +12,8 @@ $.post('post/ip.php', function(data) {
 							_drawDots(i + 1);
 						}, 10);
 					});
+				} else {
+					_drawDots(i + 1);
 				}
 
 			} else {
