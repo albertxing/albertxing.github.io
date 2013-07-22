@@ -6,6 +6,7 @@ $.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
 		console.log(data);
 		$.get('ip', function (data) {
 			var _lines = data.split("\n");
+			console.log(_lines);
 			for (i in _lines) {
 				var mat = _lines[i].split('.');
 				addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100);
