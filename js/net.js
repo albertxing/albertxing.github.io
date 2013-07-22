@@ -1,6 +1,5 @@
 $.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
 	var _dat = data.ip;
-	console.log(data.ip);
 	$.post('post/ip.php', {
 		'ip': _dat.substr(0, _dat.lastIndexOf("."))
 	}, function(data) {
