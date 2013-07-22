@@ -3,7 +3,6 @@ $.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
 	$.post('post/ip.php', {
 		'ip': _dat.substr(0, _dat.lastIndexOf("."))
 	}, function(data) {
-		console.log(data);
 		$.get('ip', function (data) {
 			var _lines = data.split("\n");
 			for (i in _lines) {
@@ -51,7 +50,7 @@ function moveCamera(x, y, z) {
 	renderer.render(scene, camera);
 }
 
-$('#net > canvas').mousemove(function(e) {
+$('#net > canvas').mousemove(function (e) {
 
 	var t = Math.atan((e.pageX - (window.innerWidth / 2)) / 200),
 	p = -Math.atan((e.pageY - (window.innerHeight / 2)) / 200);
@@ -61,4 +60,11 @@ $('#net > canvas').mousemove(function(e) {
 	y = 200 * Math.sin(p);
 
 	moveCamera(x, y, z);
-})
+});
+
+$(window).resize(function () {
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.render(scene, camera);
+});
