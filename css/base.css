@@ -10,9 +10,34 @@ body {
 	background: #fafafa;
 }
 
+#loading.lsd {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 72px;
+	font-weight: bold;
+	text-align: center;
+	width: 50px;
+	margin-left: -25px;
+	margin-top: -45px;
+	-webkit-animation-duration: 3s;
+	-moz-animation-duration: 3s;
+	-o-animation-duration: 3s;
+	animation-duration: 3s;
+}
+
+#loading:after {
+	content: attr(data-loaded);
+	display: block;
+	font-size: 10pt;
+	font-family: 'DejaVu Sans Mono', 'Consolas', 'Monaco', monospace;
+	font-weight: normal;
+}
+
 #knight {
 	width: 64px;
 	margin: 32px;
+	color: #5af;
 }
 
 #knight:before {
@@ -24,12 +49,11 @@ body {
 	font-variant: normal;
 	text-transform: none;
 	text-align: center;
-	color: #5af;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 }
 
-#knight.lsd:before {
+.lsd {
 	-webkit-animation: lsd 10s linear 0 infinite;
 	-o-animation: lsd 10s linear 0 infinite;
 	animation: lsd 10s linear 0 infinite;

@@ -1,25 +1,46 @@
-$.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
-	var _dat = data.ip;
-	$.post('post/ip.php', {
-		'ip': _dat.substr(0, _dat.lastIndexOf("."))
-	}, function(data) {
-		$.get('ip', function (data) {
-			var _lines = data.split("\n");
-			for (i in _lines) {
+$.post('post/ip.php', function(data) {
+	$.get('ip', function (data) {
+		var _lines = data.split("\n");
+		if (_lines[_lines.length - 1] === "") {
+			_lines.splice(_lines.length - 1, 1);
+		}
+		(function _drawDots (i) {
+			if (i < _lines.length) {
+
 				var mat = _lines[i].split('.');
-				if (mat.length > 1)
-					addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100);
+				$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100))
+				addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
+					setTimeout(function () {
+						_drawDots(i + 1);
+					}, 10);
+				});
+
+			} else {
+				_loaded();
 			}
-			renderer.render(scene, camera);
-			$("#knight").addClass('lsd');
-		});
+		})(0);
 	});
 });
 
+function _loaded() {
+	renderer.render(scene, camera);
+	$("#net").html(renderer.domElement);
+	$('#net > canvas').mousemove(function (e) {
+
+		var t = Math.atan((e.pageX - (window.innerWidth / 2)) / 200),
+		p = -Math.atan((e.pageY - (window.innerHeight / 2)) / 200);
+
+		var x = 200 * Math.sin(t) * Math.cos(p),
+		z = 200 * Math.cos(t) * Math.cos(p),
+		y = 200 * Math.sin(p);
+
+		moveCamera(x, y, z);
+	});
+	$("#knight").addClass('lsd');
+}
+
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-
-$("#net").append(renderer.domElement);
 
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
 camera.position.set(0, 0, 200);
@@ -29,7 +50,7 @@ var scene = new THREE.Scene();
 
 scene.fog = new THREE.FogExp2(0xfafafa, 0.004);
 
-function addPoint(x, y, z) {
+function addPoint(x, y, z, callback) {
 	var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 64, 64), new THREE.MeshBasicMaterial({color: 0xcccccc}));
 	sphere.position.set(x, y, z);
 
@@ -41,6 +62,10 @@ function addPoint(x, y, z) {
 
 	scene.add(sphere);
 	scene.add(line);
+
+	if (callback) {
+		callback();
+	}
 }
 
 function moveCamera(x, y, z) {
@@ -49,18 +74,6 @@ function moveCamera(x, y, z) {
 
 	renderer.render(scene, camera);
 }
-
-$('#net > canvas').mousemove(function (e) {
-
-	var t = Math.atan((e.pageX - (window.innerWidth / 2)) / 200),
-	p = -Math.atan((e.pageY - (window.innerHeight / 2)) / 200);
-
-	var x = 200 * Math.sin(t) * Math.cos(p),
-	z = 200 * Math.cos(t) * Math.cos(p),
-	y = 200 * Math.sin(p);
-
-	moveCamera(x, y, z);
-});
 
 $(window).resize(function () {
 	renderer.setSize(window.innerWidth, window.innerHeight);

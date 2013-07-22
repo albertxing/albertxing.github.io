@@ -1,6 +1,6 @@
 <?php
 
-$ip = $_POST['ip'] . '';
+$ip = $_SERVER['REMOTE_ADDR'];
 $list = file_get_contents('../ip');
 
 if (gettype(strpos($list, $ip)) !== "integer") {
