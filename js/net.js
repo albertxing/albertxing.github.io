@@ -1,4 +1,5 @@
 var _loaded = false;
+$("#net").width(window.innerWidth).height(window.innerHeight).css("position", "absolute").mousemove(pivot);
 
 $.post('post/ip.php', function(data) {
 	$.get('ip', function (data) {
@@ -93,5 +94,3 @@ $(window).resize(function () {
 	camera.updateProjectionMatrix();
 	renderer.render(scene, camera);
 });
-
-$("#net").width(window.innerWidth).height(window.innerHeight).mousemove(pivot);
