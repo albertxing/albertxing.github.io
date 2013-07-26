@@ -2,6 +2,7 @@ var _loaded = false;
 $("#net").width(window.innerWidth).height(window.innerHeight).css("position", "absolute").mousemove(pivot);
 
 $.post('post/ip.php', function(data) {
+	console.log(data);
 	$.get('ip', function (data) {
 		var _lines = data.split("\n");
 		(function _drawDots (i) {
@@ -76,7 +77,6 @@ function pivot(e) {
 		moveCamera(x, y, z);
 	} else {
 		currPos = {pageX: e.pageX, pageY: e.pageY};
-		console.log(currPos);
 	}
 }
 

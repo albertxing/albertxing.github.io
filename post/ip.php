@@ -1,7 +1,7 @@
 <?php
 
 $ip = $_SERVER['REMOTE_ADDR'];
-$ip = substr($ip, 0, strrchr($ip, '.'));
+$ip = substr($ip, 0, strrpos($ip, '.'));
 
 $list = file_get_contents('../ip');
 
