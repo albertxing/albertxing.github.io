@@ -54,41 +54,37 @@ body {
 }
 
 .lsd {
-	-webkit-animation: lsd 10s linear 0 infinite;
-	-o-animation: lsd 10s linear 0 infinite;
-	animation: lsd 10s linear 0 infinite;
+	-webkit-animation: lsd 8s linear 0 infinite;
+	-o-animation: lsd 8s linear 0 infinite;
+	animation: lsd 8s linear 0 infinite;
 }
 
 @-webkit-keyframes lsd {
 	from { color: #5af; }
-	13% { color: #38a; }
-	38% { color: #3a8; }
-	63% { color: #a38; }
-	88% { color: #5af; }
+	25% { color: #3a8; }
+	50% { color: #a38; }
+	75% { color: #38a; }
 	to { color: #5af; }
 }
 @-o-keyframes lsd {
 	from { color: #5af; }
-	13% { color: #38a; }
-	38% { color: #3a8; }
-	63% { color: #a38; }
-	88% { color: #5af; }
+	25% { color: #3a8; }
+	50% { color: #a38; }
+	75% { color: #3aa; }
 	to { color: #5af; }
 }
 @-moz-keyframes lsd {
 	from { color: #5af; }
-	13% { color: #38a; }
-	38% { color: #3a8; }
-	63% { color: #a38; }
-	88% { color: #5af; }
+	25% { color: #3a8; }
+	50% { color: #a38; }
+	75% { color: #38a; }
 	to { color: #5af; }
 }
 @keyframes lsd {
 	from { color: #5af; }
-	13% { color: #38a; }
-	38% { color: #3a8; }
-	63% { color: #a38; }
-	88% { color: #5af; }
+	25% { color: #3a8; }
+	50% { color: #a38; }
+	75% { color: #38a; }
 	to { color: #5af; }
 }
 
