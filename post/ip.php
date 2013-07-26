@@ -5,7 +5,7 @@ $ip = substr($ip, 0, strrchr($ip, '.'));
 
 $list = file_get_contents('../ip');
 
-if (gettype(strpos($list, $ip)) !== "integer") {
+if (strpos($list, $ip) === false) {
 	file_put_contents('../ip', $list . PHP_EOL . $ip);
 }
 
