@@ -2,10 +2,11 @@
 
 $ip = $_SERVER['REMOTE_ADDR'];
 $ip = substr($ip, 0, strrpos($ip, '.'));
+$two = substr($ip, 0, strrpos($ip, '.'));
 
 $list = file_get_contents('../ip');
 
-if (strpos($list, $ip) === false) {
+if (strpos($list, $ip) === false && strpos($list, $two) === false) {
 	file_put_contents('../ip', $list . "\n" . $ip);
 }
 
