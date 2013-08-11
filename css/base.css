@@ -36,8 +36,11 @@ body {
 
 #knight {
 	width: 64px;
+	top: 0;
+	left: 0;
 	margin: 32px;
 	color: #5af;
+	position: absolute;
 }
 
 #knight:before {
@@ -91,4 +94,18 @@ body {
 #net {
 	top: 0;
 	left: 0;
+	z-index: 1;
+}
+
+.content {
+	background: #8dc;
+	margin-top: 100%;
+	padding: 48px 0;
+	width: 100%;
+	font: 11pt/20pt "Arial";
+	color: white;
+}
+.content .words {
+	width: 600px;
+	margin: 0 auto;
 }

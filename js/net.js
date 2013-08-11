@@ -1,5 +1,9 @@
 var _loaded = false;
-$("#net").width(window.innerWidth).height(window.innerHeight).css("position", "absolute").mousemove(pivot);
+var height = $(window).height();
+var width = $(window).width();
+
+$(".content").css("margin-top", height);
+$("#net").width(width).height(height).css("position", "absolute").mousemove(pivot);
 
 $.post('post/ip.php', function(data) {
 	$.get('ip', function (data) {
@@ -13,7 +17,7 @@ $.post('post/ip.php', function(data) {
 					addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
 						setTimeout(function () {
 							_drawDots(i + 1);
-						}, 40);
+						}, 20);
 					});
 				} else {
 					_drawDots(i + 1);
@@ -36,9 +40,9 @@ function _loadedCallback() {
 var currPos = {pageX: 0, pageY: 0}
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(width, height);
 
-var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+var camera = new THREE.PerspectiveCamera(45, width / height, 1, 500);
 camera.position.set(0, 0, 200);
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -65,8 +69,8 @@ function addPoint(x, y, z, callback) {
 }
 
 function pivot(e) {
-	var t = Math.atan((e.pageX - (window.innerWidth / 2)) / 200),
-	p = -Math.atan((e.pageY - (window.innerHeight / 2)) / 200);
+	var t = Math.atan((e.pageX - (width / 2)) / 200),
+	p = -Math.atan((e.pageY - (height / 2)) / 200);
 
 	var x = 200 * Math.sin(t) * Math.cos(p),
 	z = 200 * Math.cos(t) * Math.cos(p),
@@ -87,9 +91,16 @@ function moveCamera(x, y, z) {
 }
 
 $(window).resize(function () {
-	$("#net").width(window.innerWidth).height(window.innerHeight);
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	camera.aspect = window.innerWidth / window.innerHeight;
+	height = $(window).height();
+	width = $(window).width();
+
+	$(".content").css("margin-top", height);
+	$("#net").width(width).height(height);
+
+	renderer.setSize(width, height);
+	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
 	renderer.render(scene, camera);
 });
+
+$(window).resize();
