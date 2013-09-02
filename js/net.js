@@ -57,7 +57,7 @@ function addPoint(x, y, z, callback) {
 	sphere.position.set(x, y, z);
 
 	for (var i in alr) {
-		if (Math.random() < 9) {
+		if (Math.random() < .2) {
 			var iv = alr[i];
 			var lineGeo = new THREE.Geometry();
 			lineGeo.vertices.push(new THREE.Vector3(iv[0], iv[1], iv[2]));
