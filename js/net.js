@@ -1,6 +1,7 @@
 var _loaded = false;
 var height = $(window).height();
 var width = $(window).width();
+var alr = [];
 
 $(".content").css("margin-top", height);
 $("#net").width(width).height(height).css("position", "absolute").mousemove(pivot);
@@ -19,6 +20,7 @@ $.post('post/ip.php', function(data) {
 							_drawDots(i + 1);
 						}, 20);
 					});
+					alr.push([mat[0] - 100, mat[1] - 100, mat[2] - 100]);
 				} else {
 					_drawDots(i + 1);
 				}
@@ -54,14 +56,18 @@ function addPoint(x, y, z, callback) {
 	var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0xcccccc}));
 	sphere.position.set(x, y, z);
 
-	var lineGeo = new THREE.Geometry();
-	lineGeo.vertices.push(new THREE.Vector3(0, 0, 0));
-	lineGeo.vertices.push(new THREE.Vector3(x, y, z));
+	for (var i in alr) {
+		if (Math.random() < .2) {
+			var iv = alr[i];
+			var lineGeo = new THREE.Geometry();
+			lineGeo.vertices.push(new THREE.Vector3(iv[0], iv[1], iv[2]));
+			lineGeo.vertices.push(new THREE.Vector3(x, y, z));
 
-	var line = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({color: 0xcccccc, fog: true}))
+			scene.add(new THREE.Line(lineGeo, new THREE.LineBasicMaterial({color: 0xcccccc, fog: true})));
+		}
+	}
 
 	scene.add(sphere);
-	scene.add(line);
 
 	if (callback) {
 		callback();
