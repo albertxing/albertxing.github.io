@@ -5,29 +5,28 @@ var width = $(window).width();
 $(".content").css("margin-top", height);
 $("#net").width(width).height(height).css("position", "absolute").mousemove(pivot);
 
-$.post('post/ip.php', function(data) {
-	$.get('ip', function (data) {
-		var _lines = data.split("\n");
-		(function _drawDots (i) {
-			if (i < _lines.length) {
-				$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100));
+$.get('ip', function (data) {
+	$.post('post/ip.php');
+	var _lines = data.split("\n");
+	(function _drawDots (i) {
+		if (i < _lines.length) {
+			$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100));
 
-				var mat = _lines[i].split('.');
-				if (mat.length > 1) {
-					addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
-						setTimeout(function () {
-							_drawDots(i + 1);
-						}, 20);
-					});
-				} else {
-					_drawDots(i + 1);
-				}
-
+			var mat = _lines[i].split('.');
+			if (mat.length > 1) {
+				addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
+					setTimeout(function () {
+						_drawDots(i + 1);
+					}, 20);
+				});
 			} else {
-				_loadedCallback();
+				_drawDots(i + 1);
 			}
-		})(0);
-	});
+
+		} else {
+			_loadedCallback();
+		}
+	})(0);
 });
 
 function _loadedCallback() {	
