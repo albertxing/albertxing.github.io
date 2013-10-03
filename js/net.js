@@ -7,6 +7,15 @@ $("#net").width(width).height(height).css("position", "absolute").mousemove(pivo
 
 $.get('ip', function (data) {
 	$.post('post/ip.php');
+	draw(data);
+}).fail(function () {
+	$.get('http://axg.nu/ip', function (data) {
+		$.post('http://axg.nu/ip.php');
+		draw(data);
+	});
+});
+
+function draw(data) {
 	var _lines = data.split("\n");
 	(function _drawDots (i) {
 		if (i < _lines.length) {
@@ -27,7 +36,7 @@ $.get('ip', function (data) {
 			_loadedCallback();
 		}
 	})(0);
-});
+}
 
 function _loadedCallback() {	
 	$("#net").html(renderer.domElement);
