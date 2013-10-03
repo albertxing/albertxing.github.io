@@ -10,7 +10,7 @@ $.get('ip', function (data) {
 	draw(data);
 }).fail(function () {
 	$.get('http://axg.nu/ip', function (data) {
-		$.post('http://axg.nu/ip.php');
+		$.post('http://axg.nu/post/ip.php');
 		draw(data);
 	});
 });
