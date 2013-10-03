@@ -5,38 +5,30 @@ var width = $(window).width();
 $(".content").css("margin-top", height);
 $("#net").width(width).height(height).css("position", "absolute").mousemove(pivot);
 
-$.get('ip', function (data) {
-	$.post('post/ip.php');
-	draw(data);
-}).fail(function () {
+$.post('http://axg.nu/post/ip.php', function () {
 	$.get('http://axg.nu/ip', function (data) {
-		$.post('http://axg.nu/post/ip.php');
-		draw(data);
+		var _lines = data.split("\n");
+		(function _drawDots (i) {
+			if (i < _lines.length) {
+				$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100));
+
+				var mat = _lines[i].split('.');
+				if (mat.length > 1) {
+					addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
+						setTimeout(function () {
+							_drawDots(i + 1);
+						}, 20);
+					});
+				} else {
+					_drawDots(i + 1);
+				}
+
+			} else {
+				_loadedCallback();
+			}
+		})(0);
 	});
 });
-
-function draw(data) {
-	var _lines = data.split("\n");
-	(function _drawDots (i) {
-		if (i < _lines.length) {
-			$("#loading").attr("data-loaded", parseInt(i / _lines.length * 100));
-
-			var mat = _lines[i].split('.');
-			if (mat.length > 1) {
-				addPoint(mat[0] - 100, mat[1] - 100, mat[2] - 100, function () {
-					setTimeout(function () {
-						_drawDots(i + 1);
-					}, 20);
-				});
-			} else {
-				_drawDots(i + 1);
-			}
-
-		} else {
-			_loadedCallback();
-		}
-	})(0);
-}
 
 function _loadedCallback() {	
 	$("#net").html(renderer.domElement);
