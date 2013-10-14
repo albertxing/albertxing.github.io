@@ -3,7 +3,8 @@ var height = $(window).height();
 var width = $(window).width();
 
 $(".content").css("margin-top", height);
-$("#net").width(width).height(height).css("position", "absolute").mousemove(pivot);
+$("#net").width(width).height(height).css("position", "absolute");
+$(window).mousemove(pivot);
 
 $.post('http://axg.nu/post/ip.php', function () {
 	$.get('http://axg.nu/ip', function (data) {

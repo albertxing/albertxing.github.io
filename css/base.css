@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Knight';
-	src: url('../fonts/knight.woff') format('woff');
+	src: url('../fonts/knight_u.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -38,7 +38,7 @@ body {
 	width: 64px;
 	top: 0;
 	left: 0;
-	margin: 32px;
+	margin: 32px 24px;
 	color: #5af;
 	position: absolute;
 }
@@ -98,12 +98,14 @@ body {
 }
 
 .content {
+	position: relative;
 	background: #8dc;
 	margin-top: 100%;
 	padding: 48px 0;
 	width: 100%;
 	font: 11pt/20pt "Arial";
 	color: white;
+	z-index: 2;
 }
 .content .words {
 	width: 600px;
