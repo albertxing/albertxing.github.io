@@ -5,6 +5,10 @@
 	font-style: normal;
 }
 
+::selection {
+	background: rgba(255,255,255,.2);
+}
+
 body {
 	margin: 0;
 	background: #fafafa;
@@ -34,26 +38,29 @@ body {
 	font-weight: normal;
 }
 
-#knight {
-	width: 64px;
-	top: 0;
-	left: 0;
-	margin: 32px 24px;
-	color: #5af;
+#a {
 	position: absolute;
-}
-
-#knight:before {
-	font-family: 'Knight';
-	content: attr(data-icon);
-	speak: none;
-	font-size: 64px;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
+	height: inherit;
+	width: 100%;
 	text-align: center;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+	font-size: 256pt;
+	font-family: Arial;
+	font-weight: bold;
+	color: #8dc;
+	opacity: 0;
+	cursor: default;
+	-webkit-transition: opacity .5s;
+	-moz-transition: opacity .5s;
+	-ms-transition: opacity .5s;
+	-o-transition: opacity .5s;
+	transition: opacity .5s;
+}
+#a > div {
+	position: relative;
+	height: 100px;
+	line-height: 100px;
+	top: 50%;
+	margin-top: -50px;
 }
 
 .lsd {
@@ -95,6 +102,10 @@ body {
 	top: 0;
 	left: 0;
 	z-index: 1;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .content {

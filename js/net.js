@@ -31,9 +31,13 @@ $.post('http://axg.nu/post/ip.php', function () {
 	});
 });
 
-function _loadedCallback() {	
-	$("#net").html(renderer.domElement);
-	$("#knight").addClass('lsd');
+function _loadedCallback() {
+	$("#loading").remove();
+	$("#net").append(renderer.domElement);
+	$("#a").css({
+		"visibility": "visible",
+		"opacity": 1
+	});
 	_loaded = true;
 	pivot(currPos);
 }
@@ -49,20 +53,20 @@ camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 var scene = new THREE.Scene();
 
-scene.fog = new THREE.FogExp2(0xfafafa, 0.004);
+scene.fog = new THREE.FogExp2(0xfafafa, 0.002);
 
 function addPoint(x, y, z, callback) {
-	var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0xcccccc}));
+	var sphere = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), new THREE.MeshBasicMaterial({color: 0xffffff}));
 	sphere.position.set(x, y, z);
 
 	var lineGeo = new THREE.Geometry();
 	lineGeo.vertices.push(new THREE.Vector3(0, 0, 0));
 	lineGeo.vertices.push(new THREE.Vector3(x, y, z));
 
-	var line = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({color: 0xcccccc, fog: true}))
+	var line = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({color: 0xffffff, fog: true}))
 
 	scene.add(sphere);
-	scene.add(line);
+	// scene.add(line);
 
 	if (callback) {
 		callback();
@@ -73,9 +77,9 @@ function pivot(e) {
 	var t = Math.atan((e.pageX - (width / 2)) / 200),
 	p = -Math.atan((e.pageY - (height / 2)) / 200);
 
-	var x = 200 * Math.sin(t) * Math.cos(p),
-	z = 200 * Math.cos(t) * Math.cos(p),
-	y = 200 * Math.sin(p);
+	var x = 300 * Math.sin(t) * Math.cos(p),
+	z = 300 * Math.cos(t) * Math.cos(p),
+	y = 300 * Math.sin(p);
 
 	if (_loaded) {
 		moveCamera(x, y, z);
