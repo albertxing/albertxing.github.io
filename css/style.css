@@ -1,0 +1,79 @@
+.w0 { width: 8.33vw; }
+.w1 { width: 16.66vw; }
+.w2 { width: 33.33vw; }
+.w3 { width: 50vw; }
+.w4 { width: 66.66vw; }
+.w5 { width: 83.33vw; }
+.w6 { width: 100vw; }
+
+.h0 { height: 8.33vw; }
+.h1 { height: 16.66vw; }
+.h2 { height: 33.33vw; }
+.h3 { height: 50vw; }
+.h4 { height: 66.66vw; }
+.h5 { height: 83.33vw; }
+.h6 { height: 100vw; }
+
+.t0 { margin-top: 8.33vw; }
+.t1 { margin-top: 16.66vw; }
+.t2 { margin-top: 33.33vw; }
+.t3 { margin-top: 50vw; }
+.t4 { margin-top: 66.66vw; }
+.t5 { margin-top: 83.33vw; }
+.t6 { margin-top: 100vw; }
+
+body {
+	margin: 0;
+	font: 12pt "franklin_gothic_fsbook";
+	text-rendering: optimizeLegibility;
+}
+
+header {
+	overflow: hidden;
+}
+
+nav ul {
+	list-style: none;
+	padding: calc(100vw / 12 - 0.5em) 0 0 16.66vw;
+	margin: 0;
+}
+nav ul li {
+	float: left;
+	width: 16.66vw;
+}
+nav ul li a {
+	text-decoration: none;
+	color: #000;
+}
+
+h1 {
+	font: 400 48pt / 1em "franklin_gothic_fsbook";
+	margin: 0 16.66vw 0 0;
+	width: 16.66vw;
+	text-align: right;
+	float: right;
+}
+
+div.side {
+	position: absolute;
+	font-size: 10pt;
+	right: calc(8.33vw - 0.5em);
+	top: calc(3 * 16.66vw);
+	width: 0;
+	white-space: nowrap;
+	transform: rotate(90deg);
+}
+
+img {
+	float: left;
+	vertical-align: top;
+}
+img.c {
+	margin-left: -16.66vw;
+}
+img.p {
+	margin-top: 8.33vw;
+}
+img.b {
+	margin-top: 16.66vw;
+}
