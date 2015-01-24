@@ -1,6 +1,7 @@
 .w0 { width: 8.33vw; }
 .w1 { width: 16.66vw; }
 .w2 { width: 33.33vw; }
+.w25 { width: 41.66vw; }
 .w3 { width: 50vw; }
 .w4 { width: 66.66vw; }
 .w5 { width: 83.33vw; }
@@ -22,9 +23,32 @@
 .t5 { margin-top: 83.33vw; }
 .t6 { margin-top: 100vw; }
 
+.l0 { margin-left: 8.33vw; }
+.l1 { margin-left: 16.66vw; }
+.l2 { margin-left: 33.33vw; }
+.l3 { margin-left: 50vw; }
+.l4 { margin-left: 66.66vw; }
+.l5 { margin-left: 83.33vw; }
+.l6 { margin-left: 100vw; }
+
+h1 {
+	font-weight: 400;
+	font-size: 32pt;
+	line-height: 1em;
+}
+h2 {
+	font-weight: 400;
+	font-size: 24pt;
+	line-height: 1em;
+}
+
+p:first-child, h2:first-child {
+	margin-top: 0;
+}
+
 body {
 	margin: 0;
-	font: 12pt "franklin_gothic_fsbook";
+	font: 12pt "Franklin Gothic Book";
 	text-rendering: optimizeLegibility;
 }
 
@@ -46,10 +70,9 @@ nav ul li a {
 	color: #000;
 }
 
-h1 {
-	font: 400 48pt / 1em "franklin_gothic_fsbook";
+.title {
+	font: 400 48pt / 1em "Franklin Gothic Book";
 	margin: 0 16.66vw 0 0;
-	width: 16.66vw;
 	text-align: right;
 	float: right;
 }
@@ -71,9 +94,10 @@ img {
 img.c {
 	margin-left: -16.66vw;
 }
-img.p {
-	margin-top: 8.33vw;
+
+.rudolph .text {
+	display: inline-block;
 }
-img.b {
-	margin-top: 16.66vw;
+.rudolph img {
+	margin-right: 8.33vw;
 }
