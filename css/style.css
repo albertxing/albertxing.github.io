@@ -39,6 +39,12 @@
 .l5 { margin-left: 83.33vw; }
 .l6 { margin-left: 100vw; }
 
+a {
+	color: #000;
+}
+a:hover {
+	text-decoration: none;
+}
 a[name] {
 	visibility: hidden;
 	position: absolute;
@@ -55,6 +61,10 @@ h2 {
 	line-height: 1em;
 	margin: 1em 0;
 }
+h3 {
+	font-weight: 400;
+	font-size: 16pt;
+}
 
 p:first-child, h2:first-child {
 	margin-top: 0;
@@ -69,11 +79,15 @@ hr.short {
 	margin: 1em 0;
 }
 
+html, body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
 body {
 	margin: 0;
 	font: 12pt "Franklin Gothic Book";
 	text-rendering: optimizeLegibility;
-	overflow-x: hidden;
 }
 
 header {
@@ -167,7 +181,40 @@ header img.c {
 	top: 104px;
 	left: 56px;
 }
-
 .excess .text {
 	margin-top: -48pt;
+}
+
+.contact {
+	margin: 16.66vw 0;
+}
+.contact ul {
+	padding: 0;
+	list-style: none;
+}
+.contact li:before {
+	content: "- ";
+	position: absolute;
+	margin-left: -1em;
+}
+.contact h3 {
+	margin: 0;
+}
+.contact .left {
+	float: left;
+}
+.contact .email {
+	text-align: right;
+}
+.contact .email a {
+	display: inline-block;
+	text-decoration: none;
+	border-bottom: 1px solid;
+}
+.contact .email a:hover {
+	border-bottom-color: transparent;
+}
+.contact .links {
+	clear: both;
+	margin-top: 16pt;
 }
