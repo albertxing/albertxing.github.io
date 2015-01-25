@@ -4,8 +4,8 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/fonts.css">
 </head>
-<body>
-	<header itemscope itemtype="http://data-vocabulary.org/Person">
+<body itemscope itemtype="http://data-vocabulary.org/Person">
+	<header>
 		<nav class="h1">
 			<ul>
 				<li><a href="#about">About</a></li>
@@ -14,7 +14,7 @@
 			</ul>
 		</nav>
 		<div class="title w1" itemprop="name">Albert Xing</div>
-		<div class="side right at3" itemprop="title">
+		<div class="side right at3">
 			Designer &amp; Developer
 		</div>
 		<img class="c" src="amc.png">
@@ -24,7 +24,7 @@
 	<a name="about">&nbsp;</a>
 	<div class="content l1 t1 w4">
 		<section class="about w1">
-			<p>I'm a designer and developer based in Vancouver, B.C</p>
+			<p>I'm a <span itemprop="title">designer and developer</span> based in <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"><span itemprop="locality">Vancouver</span>, <span itemprop="region">B.C</span></span></p>
 			<p>Currently in my third year of study at the University of British Columbia</p>
 		</section>
 		<a name="portfolio"></a>
