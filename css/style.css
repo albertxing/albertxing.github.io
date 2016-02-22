@@ -161,6 +161,20 @@ header img.c {
 	direction: ltr;
 }
 
+.alight .text {
+	margin-top: -48pt;
+}
+.alight img {
+	margin-right: 8.33vw;
+}
+
+.stool .text {
+	margin-top: -48pt;
+}
+.stool img {
+	margin-left: 8.33vw;
+}
+
 .rudolph .text {
 	margin-top: -72pt;
 }
